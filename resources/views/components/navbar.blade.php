@@ -13,7 +13,7 @@
                     <a class="nav-link text-white" href="{{route('contact')}}">Contact us</a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link text-white">Sign in</a>
+                    <a href="{{route('movies.index')}}" class="nav-link text-white">Lista</a>
                 </li>
             </ul>
         </div>

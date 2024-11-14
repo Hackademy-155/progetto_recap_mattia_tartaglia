@@ -2,31 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
 use Illuminate\Http\Request;
 
-class PublicConctroller extends Controller
+class MovieController extends Controller
 {
-    public function homepage() {
-        $films = array_slice($this->movies, 0, 3);
-        return view('welcome', ['movies' => $films]);
-    }
-
-    public function contact(){
-        return view('contact');
-    }
-    
-    public function contactSubmit(Request $request){
-        $title = $request->input('title');
-        $director = $request->director;
-        $description = $request->description;
-
-        try{
-            Mail::to('bot@bot.com')->send(new ContctMail($title, $director, $description));
-            return redirect(route('homepage'))->with('success');
-        }catch(Exception $error){
-            return redirect()->back()->with('error');
-        }
+    public function index(){
+        return view("movies.index", ['movies' => $this->movies]);
     }
     
     public $movies=[
@@ -59,4 +40,12 @@ class PublicConctroller extends Controller
             'genre' => 'Azione'
         ],
     ];
+
+    public function show($id){
+        foreach($this->movies as $movie){
+            if($movie['id']==$id){
+                return view('movies.show', ['movie'=>$movie]);
+            }
+        }
+    }
 }

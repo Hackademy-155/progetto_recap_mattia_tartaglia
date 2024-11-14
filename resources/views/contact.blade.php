@@ -1,25 +1,36 @@
 <x-layout>
-    <div class="container-fluid header2">
+    <div class="container my-5">
         <div class="row">
-            <div class="col-12 my-5">
-                <h2 class="text-center">Contact us</h2>
+            <div class="col-12">
+                <h2 class="text-center">Contattataci</h2>
             </div>
         </div>
-        <form class="justify-content-center align-items-center text-center py-5" action="" method="POST">
-            <div class="mb-3">
-                @csrf
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+    </div>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <form action="{{route('contact.submit')}}" method="">
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    @csrf
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Titolo</label>
+                        <input type="text" class="form-control" id="title" name="title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="director" class="form-label">Regista</label>
+                        <input type="text" class="form-control" id="director" name="director">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Plot</label>
+                        <textarea name="description" class="form-control" id="description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-dark">Invia</button>
+                </form>
             </div>
-            <div class="mb-3">
-                <label for="nome" class="form-label">Name</label>
-                <input type="text" class="form-control" name="user" id="nome">
-            </div>
-            <div class="icon-link-hover">
-                <label for="messaggio">Your request</label>
-                <textarea class="form-control" id="messaggio" name="message"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        </div>
     </div>
 </x-layout>
