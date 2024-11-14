@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
+use App\Mail\EmailController;
+use Illuminate\Support\Facades\Mail;
 
 class PublicConctroller extends Controller
 {
@@ -22,7 +24,7 @@ class PublicConctroller extends Controller
         $description = $request->description;
 
         try{
-            Mail::to('bot@bot.com')->send(new ContctMail($title, $director, $description));
+            Mail::to('bot@bot.com')->send(new EmailController($title, $director, $description));
             return redirect(route('homepage'))->with('success');
         }catch(Exception $error){
             return redirect()->back()->with('error');
